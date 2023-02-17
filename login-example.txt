@@ -1,0 +1,16 @@
+PERFIL 1 :ID 1
+    MENU A :ID 1
+        PANTALLA 1 : ID 1
+            ACCION A :ID 1
+            ACCION B :ID 2
+        PANTALLA 2 : ID 2
+            ACCION C :ID 3
+            ACCION D :ID 4
+    MENU B: ID 2
+        PANTALLA 3 :ID 3
+            ACCION B :ID 2
+            ACCION D :ID 3
+PERFIL 2: ID 2
+    MENU B: ID 2
+        PANTALLA 4 : ID 4
+            ACCION A :ID 1
