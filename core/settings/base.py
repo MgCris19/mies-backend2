@@ -57,6 +57,7 @@ LOCAL_APPS = [
     'app.menu',
     'app.action',
     'app.profile',
+    'app.balancedScoredCard'
 ]
 
 THIRD_APPS = [

@@ -4,10 +4,11 @@
 # CONEXION_HOST = 'bdproduccionmies.cscj7vuz39y8.sa-east-1.rds.amazonaws.com'
 # CONEXION_PORT = 3306
 
-CONEXION_NAME = 'db_mies_DEV'
+
+CONEXION_NAME = 'db_mies'
 CONEXION_USER = 'root'
 CONEXION_PASSWORD = 'C097_gXyf-2807676'
-CONEXION_HOST = '164.92.85.40'
+CONEXION_HOST = '143.198.172.18'
 CONEXION_PORT = 3306
 
 DATABASES = {
