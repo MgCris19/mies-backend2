@@ -80,7 +80,7 @@ class Authentication(object):
         try:
             print("dispatch")
             user = self.get_user(request)
-            method = self.get_currrent_path(request)   
+            method = self.get_currrent_path(request)  
             # print(path,method,pase)     
             if user is not None:
                 # if pase != 0:
@@ -88,7 +88,8 @@ class Authentication(object):
                     return ResponseData.Response(TYPECODE.SI,TYPECODE.UNAUTHORIZED, user, {"expired":self.user_token_expired}, status.HTTP_401_UNAUTHORIZED)
                 if not self.user_token_expired:
                     try:
-                        data = json.loads(request.body.decode ('utf-8'))                                                            
+                        data = json.loads(request.body.decode ('utf-8'))  
+                        print(daa)                            
                         if isinstance(data, list):
                             print( "dispatch data==> ",isinstance(data, list))
                             data = self.lista(data, method, user.id)

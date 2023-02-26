@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from dataclasses import field, fields
 from .models import Perspective,Objective, Indicator
 
 class PerspectiveSerializer(serializers.ModelSerializer):

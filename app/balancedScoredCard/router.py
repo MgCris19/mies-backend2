@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from app.balancedScoredCard.views import PerspectiveViewSet, IndicatorViewSet
+from app.balancedScoredCard.views import PerspectiveViewSet, IndicatorViewSet,ObjectiveViewSet
 
 router = DefaultRouter()
 router.register('/perspectiva', PerspectiveViewSet, basename='perspectiva')
