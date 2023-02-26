@@ -42,4 +42,5 @@ urlpatterns = [
     path(url, include('app.profile.router')),
     path(url, include('app.logGeneral.router')),
     path(url, include('app.observations.router')),
+    path(url, include('app.balancedScoredCard.router')),
 ]
