@@ -33,6 +33,7 @@ class Bsc(ModelBase):
     Id_Objetivo = models.ForeignKey(Objective,on_delete=models.CASCADE)
     Id_Indicator = models.ForeignKey(Indicator,on_delete=models.CASCADE,null=True)
     Id_emprendedor = models.ForeignKey(Entrepreneur,on_delete=models.CASCADE, unique=True)
+    
     class Meta:
         db_table = 'tbl_bsc'
 
