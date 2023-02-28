@@ -37,3 +37,14 @@ class Bsc(ModelBase):
     class Meta:
         db_table = 'tbl_bsc'
 
+class Control(ModelBase):
+    bsc = models.OneToOneField(Bsc, on_delete=models.CASCADE)
+    # bsc = models.ForeignKey(Bsc, on_delete=models.CASCADE, unique=True)
+    actividad = models.CharField(max_length=150, blank=False, null=False)
+    fecha_inicio = models.DateTimeField(auto_now=False, auto_now_add=True)
+    fecha_fin = models.DateTimeField(auto_now=False, auto_now_add=True)
+    peso_actividad = models.IntegerField()
+    avance = models.IntegerField()
+    
+    class Meta:
+        db_table = 'tbl_control'
