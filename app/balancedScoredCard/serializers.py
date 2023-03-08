@@ -27,7 +27,7 @@ class ObjectiveSerializer(serializers.ModelSerializer):
 class BscSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bsc
-        fields = ('id','state','peso','peso_avance','peso_alcanzado') 
+        fields = '__all__'
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
@@ -42,8 +42,7 @@ class BscSerializer(serializers.ModelSerializer):
 class ControlSerializer(serializers.ModelSerializer):
     class Meta:
         model = Control
-        fields = ('id','state','actividad','fecha_inicio',
-        'fecha_fin','peso_actividad','avance')
+        fields = '__all__'
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
@@ -51,6 +50,5 @@ class ControlSerializer(serializers.ModelSerializer):
         instance.bsc.id,'peso':instance.bsc.peso,
         'peso_avance':instance.bsc.peso_avance,
         'peso_alcanzado':instance.bsc.peso_alcanzado}
-       
-        
+
         return ret
