@@ -41,8 +41,8 @@ class Control(ModelBase):
     bsc = models.OneToOneField(Bsc, on_delete=models.CASCADE)
     # bsc = models.ForeignKey(Bsc, on_delete=models.CASCADE, unique=True)
     actividad = models.CharField(max_length=150, blank=False, null=False)
-    fecha_inicio = models.DateTimeField(auto_now=False, auto_now_add=True)
-    fecha_fin = models.DateTimeField(auto_now=False, auto_now_add=True)
+    fecha_inicio = models.DateTimeField(auto_now=False, auto_now_add=False)
+    fecha_fin = models.DateTimeField(auto_now=False, auto_now_add=False)
     peso_actividad = models.IntegerField()
     avance = models.IntegerField()
     
