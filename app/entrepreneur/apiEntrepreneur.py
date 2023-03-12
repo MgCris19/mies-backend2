@@ -13,7 +13,7 @@ def getEntrepreneurByName(request):
     
     try:
             search = request.data['search']
-            registros = Entrepreneur.objects.filter(entrepreneur__icontains=search)
+            registros = Entrepreneur.objects.filter(entrepreneur__icontains=search,state='A')
             if registros:
                 data = {'data': list(registros.values())}
                 return Response(data)
