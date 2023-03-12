@@ -1,6 +1,5 @@
 from rest_framework import status, viewsets
 from app.balancedScoredCard.serializers import IndicatorSerializer, PerspectiveSerializer, ObjectiveSerializer, BscSerializer, ControlSerializer
-
 from app.modelBase.response import ResponseData
 from app.middleware.mixins import Authentication
 from app.modelBase.enum import TYPECODE, MESSAGE

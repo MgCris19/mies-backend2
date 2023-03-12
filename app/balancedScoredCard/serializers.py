@@ -38,7 +38,7 @@ class BscSerializer(serializers.ModelSerializer):
         ret['Id_Indicator'] = {'id_indicador': 
         instance.Id_Indicator.id,'name':instance.Id_Indicator.name}
         ret['Id_emprendedor'] = {'id_emprendedor': 
-        instance.Id_emprendedor.id,'name':instance.Id_emprendedor.user.names}
+        instance.Id_emprendedor.id,'name':instance.Id_emprendedor.entrepreneur}
         return ret
         
 class ControlSerializer(serializers.ModelSerializer):
