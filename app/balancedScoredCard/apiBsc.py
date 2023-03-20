@@ -14,8 +14,8 @@ def getBscByName(request):
     
     try:
             search = request.data['search']
-            consulta = "select tb.* from tbl_bsc tb join tbl_emprendedor te on te.id  = tb.Id_emprendedor_id where UPPER(te.emprendedor)  like UPPER(%s) and tb.state = 'A'"
-            filtro = '%'+search+'%'
+            consulta = "select tb.* from tbl_bsc tb where tb.Id_emprendedor_id = (%s) and tb.state = 'A'"
+            filtro = search
             registros = Bsc.objects.raw(consulta,[filtro])
 
             if registros:
