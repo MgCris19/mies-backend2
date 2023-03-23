@@ -31,14 +31,14 @@ class BscSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
-        ret['Id_Objetivo'] = {'id_objetivo': 
+        ret['objetivo'] = {'id_objetivo': 
         instance.Id_Objetivo.id,'name':instance.Id_Objetivo.name}
         ret['perspectiva']= {'id_perspectiva': 
         instance.Id_Objetivo.perspective.id,'name':instance.Id_Objetivo.perspective.name}
-        ret['Id_Indicator'] = {'id_indicador': 
+        ret['indicador'] = {'id_indicador': 
         instance.Id_Indicator.id,'name':instance.Id_Indicator.name}
-        ret['Id_emprendedor'] = {'id_emprendedor': 
-        instance.Id_emprendedor.id,'name':instance.Id_emprendedor.entrepreneur}
+        ret['emprendedor'] = {'id_emprendedor': 
+        instance.Id_emprendedor.id,'name':instance.Id_emprendedor.user.names}
         return ret
         
 class ControlSerializer(serializers.ModelSerializer):

@@ -4,8 +4,7 @@ from app.entrepreneur.serializers import EntrepreneurSerializer, PhoneEntreprene
 from app.modelBase.response import ResponseData
 from app.middleware.mixins import Authentication
 from app.modelBase.enum import TYPECODE,MESSAGE
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+
 class EntrepreneurViewSet(Authentication, viewsets.ModelViewSet):
     serializer_class = EntrepreneurSerializer
 
@@ -259,4 +258,3 @@ class PhonebyEntrepreneurViewSet(Authentication, viewsets.ModelViewSet):
             phonebyent_serializer = self.serializer_class(self.get_queryset(pk), many=True)
             return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.OK, phonebyent_serializer.data, status.HTTP_200_OK)
         return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
-
