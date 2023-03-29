@@ -53,8 +53,11 @@ class ControlSerializer(serializers.ModelSerializer):
         'peso_avance':instance.bsc.peso_avance,
         'peso_alcanzado':instance.bsc.peso_alcanzado,
         'id_objetivo':instance.bsc.Id_Objetivo.id,
+        'objetivo':instance.bsc.Id_Objetivo.name,
         'id_indicador':instance.bsc.Id_Indicator.id,
         'nombre_indicador':instance.bsc.Id_Indicator.name,
-        'id_emprendedor':instance.bsc.Id_emprendedor.id}
+        'id_emprendedor':instance.bsc.Id_emprendedor.id,
+        'emprendedor':instance.bsc.Id_emprendedor.entrepreneur
+        }
 
         return ret
