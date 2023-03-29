@@ -77,8 +77,9 @@ def getControlByEntrepreneur(request):
                     resBsc = {'id_bsc': 
                     resultado.bsc.id,'peso':resultado.bsc.peso,'peso_avance':resultado.bsc.peso_avance
                     ,'peso_alcanzado':resultado.bsc.peso_alcanzado,'id_objetivo':resultado.bsc.Id_Objetivo.id,
-                    'id_indicador':resultado.bsc.Id_Indicator.id,'nombre_indicador':resultado.bsc.
-                    Id_Indicator.name,'id_emprendedor':resultado.bsc.Id_emprendedor.id}
+                    'objetivo':resultado.bsc.Id_Objetivo.name,'id_indicador':resultado.bsc.Id_Indicator.id,
+                    'nombre_indicador':resultado.bsc.Id_Indicator.name,
+                    'id_emprendedor':resultado.bsc.Id_emprendedor.id,'emprendedor':resultado.bsc.Id_emprendedor.entrepreneur}
                     resultados_json.append({
                          'id': resultado.id,
                          'state': resultado.state,
