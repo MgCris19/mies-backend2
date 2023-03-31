@@ -32,7 +32,7 @@ class Bsc(ModelBase):
     peso_alcanzado = models.IntegerField()
     Id_Objetivo = models.ForeignKey(Objective,on_delete=models.CASCADE)
     Id_Indicator = models.ForeignKey(Indicator,on_delete=models.CASCADE,null=True)
-    Id_emprendedor = models.ForeignKey(Entrepreneur,on_delete=models.CASCADE, unique=True)
+    Id_emprendedor = models.ForeignKey(Entrepreneur,on_delete=models.CASCADE, unique=False)
     
     class Meta:
         db_table = 'tbl_bsc'
@@ -48,3 +48,5 @@ class Control(ModelBase):
     
     class Meta:
         db_table = 'tbl_control'
+
+    

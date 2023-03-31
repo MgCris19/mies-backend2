@@ -3,6 +3,7 @@ from app.balancedScoredCard.serializers import IndicatorSerializer, PerspectiveS
 from app.modelBase.response import ResponseData
 from app.middleware.mixins import Authentication
 from app.modelBase.enum import TYPECODE, MESSAGE
+from .models import Perspective,Objective, Indicator, Bsc, Control
 
 class PerspectiveViewSet(Authentication, viewsets.ModelViewSet):
     serializer_class = PerspectiveSerializer
@@ -20,17 +21,16 @@ class PerspectiveViewSet(Authentication, viewsets.ModelViewSet):
         return ResponseData.Response(TYPECODE.SI, TYPECODE.BAD_REQUEST, MESSAGE.BAD_REQUEST, serializer.errors, status.HTTP_400_BAD_REQUEST)
 
     def list(self, request):
-        perspective_serializer = self.get_serializer(self.get_queryset(), many = True)
+        perspective_serializer = self.get_serializer(
+            self.get_queryset(), many=True)
         return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.OK, perspective_serializer.data, status.HTTP_200_OK)
-        
-    
+
     def retrieve(self, request, pk=None):
         if self.get_queryset(pk):
             perspective_serializer = self.serializer_class(
                 self.get_queryset(pk))
             return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.OK, perspective_serializer.data, status.HTTP_200_OK)
         return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
-    
 
     def update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -42,7 +42,6 @@ class PerspectiveViewSet(Authentication, viewsets.ModelViewSet):
             return ResponseData.Response(TYPECODE.SI, TYPECODE.BAD_REQUEST, MESSAGE.BAD_REQUEST, perspective_serializer.errors, status.HTTP_400_BAD_REQUEST)
         return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
 
-
     def destroy(self, request, pk=None):
         try:
             perspective_serializer = self.get_queryset().filter(id=pk).first()
@@ -53,9 +52,8 @@ class PerspectiveViewSet(Authentication, viewsets.ModelViewSet):
                 perspective_serializer.save()
                 return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.DESTROY, MESSAGE.NULL, status.HTTP_200_OK)
             return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
-        except :
+        except:
             return ResponseData.Response(TYPECODE.SI, TYPECODE.INTERNAL_ERROR, MESSAGE.INTERNAL_ERROR, MESSAGE.NULL, status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
     def partial_update(self, request, pk=None):
         if self.get_queryset(pk):
@@ -68,8 +66,6 @@ class PerspectiveViewSet(Authentication, viewsets.ModelViewSet):
         return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
 
 
-
-
 class IndicatorViewSet(Authentication, viewsets.ModelViewSet):
     serializer_class = IndicatorSerializer
 
@@ -78,11 +74,10 @@ class IndicatorViewSet(Authentication, viewsets.ModelViewSet):
             return self.get_serializer().Meta.model.objects.filter(state='A')
         return self.get_serializer().Meta.model.objects.filter(state='A', id=pk).first()
 
-
     def list(self, request):
-        indicator_serializer = self.get_serializer(self.get_queryset(), many=True)
+        indicator_serializer = self.get_serializer(
+            self.get_queryset(), many=True)
         return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.OK, indicator_serializer.data, status.HTTP_200_OK)
-
 
     def retrieve(self, request, pk=None):
         if self.get_queryset(pk):
@@ -90,7 +85,6 @@ class IndicatorViewSet(Authentication, viewsets.ModelViewSet):
                 self.get_queryset(pk))
             return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.OK, indicator_serializer.data, status.HTTP_200_OK)
         return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
-
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -130,6 +124,7 @@ class IndicatorViewSet(Authentication, viewsets.ModelViewSet):
             return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
         except:
             return ResponseData.Response(TYPECODE.SI, TYPECODE.INTERNAL_ERROR, MESSAGE.INTERNAL_ERROR, MESSAGE.NULL, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class ObjectiveViewSet(Authentication, viewsets.ModelViewSet):
     serializer_class = ObjectiveSerializer
@@ -172,9 +167,9 @@ class ObjectiveViewSet(Authentication, viewsets.ModelViewSet):
     def destroy(self, request, pk=None):
         try:
             objective_serializer = self.get_queryset().filter(id=pk).first()
-            
+
             if objective_serializer:
-                
+
                 objective_serializer.state = 'I'
                 objective_serializer.id_user_modified = request.data['id_user_modified']
                 objective_serializer.save()
@@ -192,9 +187,9 @@ class ObjectiveViewSet(Authentication, viewsets.ModelViewSet):
                 return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.UPDATE, MESSAGE.NULL, status.HTTP_200_OK)
             return ResponseData.Response(TYPECODE.SI, TYPECODE.BAD_REQUEST, MESSAGE.BAD_REQUEST, objective_serializer.errors, status.HTTP_400_BAD_REQUEST)
         return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
-    
 
-class BscViewSet(Authentication,viewsets.ModelViewSet):
+
+class BscViewSet(Authentication, viewsets.ModelViewSet):
     serializer_class = BscSerializer
 
     def get_queryset(self, pk=None):
@@ -252,7 +247,8 @@ class BscViewSet(Authentication,viewsets.ModelViewSet):
         except:
             return ResponseData.Response(TYPECODE.SI, TYPECODE.INTERNAL_ERROR, MESSAGE.INTERNAL_ERROR, MESSAGE.NULL, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class ControlViewSet(Authentication,viewsets.ModelViewSet):
+
+class ControlViewSet(Authentication, viewsets.ModelViewSet):
     serializer_class = ControlSerializer
 
     def get_queryset(self, pk=None):
@@ -261,7 +257,8 @@ class ControlViewSet(Authentication,viewsets.ModelViewSet):
         return self.get_serializer().Meta.model.objects.filter(state='A', id=pk).first()
 
     def list(self, request):
-        control_serializer = self.get_serializer(self.get_queryset(), many=True)
+        control_serializer = self.get_serializer(
+            self.get_queryset(), many=True)
         return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.OK, control_serializer.data, status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
@@ -273,6 +270,7 @@ class ControlViewSet(Authentication,viewsets.ModelViewSet):
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
+       # print(serializer.data.get('bsc', None))
         if serializer.is_valid():
             serializer.save()
             return ResponseData.Response(TYPECODE.NO, TYPECODE.CREATED, MESSAGE.CREATED, serializer.data, status.HTTP_201_CREATED)
@@ -280,7 +278,8 @@ class ControlViewSet(Authentication,viewsets.ModelViewSet):
 
     def update(self, request, pk=None):
         if self.get_queryset(pk):
-            control_serializer = self.serializer_class(self.get_queryset(pk), data=request.data)
+            control_serializer = self.serializer_class(
+                self.get_queryset(pk), data=request.data)
             if control_serializer.is_valid():
                 control_serializer.save()
                 return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.UPDATE, MESSAGE.NULL, status.HTTP_200_OK)
@@ -289,7 +288,8 @@ class ControlViewSet(Authentication,viewsets.ModelViewSet):
 
     def partial_update(self, request, pk=None):
         if self.get_queryset(pk):
-            control_serializer = self.serializer_class(self.get_queryset(pk), data=request.data)
+            control_serializer = self.serializer_class(
+                self.get_queryset(pk), data=request.data)
             if control_serializer.is_valid():
                 control_serializer.save()
                 return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.UPDATE, MESSAGE.NULL, status.HTTP_200_OK)
@@ -300,10 +300,41 @@ class ControlViewSet(Authentication,viewsets.ModelViewSet):
         try:
             control_serializer = self.get_queryset().filter(id=pk).first()
             if control_serializer:
-                control_serializer.state = 'I'
-                control_serializer.id_user_modified = request.data['id_user_modified']
-                control_serializer.save()
-                return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.DESTROY, MESSAGE.NULL, status.HTTP_200_OK)
+                avance_suma = 0
+                peso_suma = 0
+                control_list = list(Control.objects.all().filter(
+                bsc=control_serializer.bsc.id, state='A').exclude(id=control_serializer.id))
+                print(control_list)
+                if len(control_list) > 0:
+                    for e in control_list:
+
+                        avance_suma += (e.avance * e.peso_actividad)/100
+                        peso_suma += e.peso_actividad
+
+                    if peso_suma > 100:
+                        raise serializers.ValidationError(
+                        "El peso de las actividades no puede ser mayor a 100%")
+
+                    # bsc_model.update(peso_alcanzado=peso_alcanzado,peso_avance=avance_actividad)
+                    bsc = Bsc.objects.get(id=control_serializer.bsc.id)
+                    peso_bsc = bsc.peso
+                    peso_alcanzado = (peso_bsc * avance_suma)/100
+                    bsc.peso_alcanzado = avance_suma
+                        # bsc.peso_avance = (peso_alcanzado * bsc.peso)/100
+                    bsc.peso_avance = peso_alcanzado
+
+                    bsc.save()
+                else:
+                    bsc = Bsc.objects.get(id=control_serializer.bsc.id)
+                    bsc.peso_alcanzado = 0
+                     # bsc.peso_avance = (peso_alcanzado * bsc.peso)/100
+                    bsc.peso_avance = 0
+                    bsc.save()
+
+            control_serializer.state = 'I'
+            control_serializer.id_user_modified = request.data['id_user_modified']
+            control_serializer.save()
+            return ResponseData.Response(TYPECODE.NO, TYPECODE.OK, MESSAGE.DESTROY, MESSAGE.NULL, status.HTTP_200_OK)
             return ResponseData.Response(TYPECODE.SI, TYPECODE.NOT_FOUND, MESSAGE.NOT_FOUND, MESSAGE.NULL, status.HTTP_404_NOT_FOUND)
         except:
             return ResponseData.Response(TYPECODE.SI, TYPECODE.INTERNAL_ERROR, MESSAGE.INTERNAL_ERROR, MESSAGE.NULL, status.HTTP_500_INTERNAL_SERVER_ERROR)
